@@ -5,6 +5,9 @@
  */
 package cs4;
 
+import java.awt.Color;
+import java.awt.Graphics;
+
 /**
  *
  * @author elliot.vesterlund
@@ -26,7 +29,16 @@ public class Collider {
     public void move(){
         
     }
+
+    public Collider(double xCoord, double yCoord) {
+        this.xCoord = xCoord;
+        this.yCoord = yCoord;
+    }
     
+    public void paint(Graphics g){
+        g.setColor(Color.red);
+        g.draw3DRect(height, width, (int)xCoord, (int)yCoord, true);
+    }
         
     
 }
