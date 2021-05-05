@@ -16,6 +16,7 @@ public class Cs4 {
      */
     public static void main(String[] args) {
         Gameframe gf = new Gameframe();
+        gf.getGame().getT().start();
         
         
     }

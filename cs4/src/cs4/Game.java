@@ -5,10 +5,11 @@
  */
 package cs4;
 
+
+import java.awt.Color;
 import java.awt.Graphics;
 import java.util.ArrayList;
-import javax.swing.JPanel;
-import javax.swing.Timer;
+import javax.swing.*;
 
 /**
  *
@@ -17,34 +18,48 @@ import javax.swing.Timer;
 public class Game extends JPanel implements Runnable{
     private ArrayList<Collider> colliders;
     Timer tm;
-    
-    
+    Thread t;
+    Collider cs;
     
     public Game() {
-        Collider c = new Collider(50,50,50,50);
-        colliders.add(0,c);
-        repaint();
-        System.out.println("CCCCCCCC");
+        t = new Thread(this);
+        cs = new Collider(50,50,50,50);
+        //colliders.add(c);
     }
     
     
     @Override
     public void run() {
-        
+        while(!Thread.interrupted()){
+            try{
+                
+                repaint();
+                Thread.sleep(500);
+            }
+            catch (InterruptedException e){
+                break;
+            }
+                
+            
+        }
+    }
+
+    public Thread getT() {
+        return t;
     }
     
     
-    public void paintComponent(Graphics g){
-        System.out.println("cooks");
+    @Override
+    public void paintComponent(Graphics g) {
         super.paintComponent(g);
+       
+        g.drawRect(100, 100, 100, 100);
         paintColliders(g);
-    
-}
+    }
     
     public void paintColliders(Graphics g){
-        for (Collider c: colliders) {
-            c.paint(g);
-        }
+        cs.draw(g);
+        System.out.println("paint colle");
     }
 
     

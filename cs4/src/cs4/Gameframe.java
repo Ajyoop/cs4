@@ -7,6 +7,7 @@ package cs4;
 
 
 import javax.swing.JFrame;
+import javax.swing.JPanel;
 
 /**
  *
@@ -24,6 +25,11 @@ public class Gameframe extends JFrame{
         setResizable(false);
         setLocationRelativeTo(null);
         setVisible(true);
+        
+    }
+
+    public Game getGame() {
+        return g;
     }
     
     

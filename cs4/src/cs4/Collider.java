@@ -35,8 +35,7 @@ public class Collider {
         this.yCoord = yCoord;
     }
     
-    public void paint(Graphics g){
-        System.out.println("paintcolle");
+    public void draw(Graphics g){
         g.setColor(Color.red);
         g.draw3DRect(height, width, (int)xCoord, (int)yCoord, true);
     }
