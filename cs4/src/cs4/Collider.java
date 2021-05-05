@@ -36,6 +36,7 @@ public class Collider {
     }
     
     public void paint(Graphics g){
+        System.out.println("paintcolle");
         g.setColor(Color.red);
         g.draw3DRect(height, width, (int)xCoord, (int)yCoord, true);
     }
