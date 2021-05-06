@@ -6,10 +6,11 @@
 package cs4;
 
 
-import java.awt.Color;
 import java.awt.Graphics;
-import java.awt.event.KeyListener;
+import java.awt.Point;
+import java.awt.event.KeyEvent;
 import java.util.ArrayList;
+import java.util.HashMap;
 import javax.swing.*;
 
 /**
@@ -21,14 +22,19 @@ public class Game extends JPanel implements Runnable{
     GameKeyListener gkl; 
     Thread t;
     Collider c;
+    Point a;
+    
     
     public Game() {
+        
         t = new Thread(this);
         gkl = new GameKeyListener();
+        c = new Collider(50,50,50,50);
         addKeyListener(gkl);
         addMouseListener(gkl);
+        addMouseMotionListener(gkl);
         colliders = new ArrayList();
-        colliders.add(new Collider(50,50,50,50));
+        colliders.add(c);
     }
     
     
@@ -36,9 +42,32 @@ public class Game extends JPanel implements Runnable{
     public void run() {
         while(!Thread.interrupted()){
             try{
+                HashMap<Integer, Boolean> keys = gkl.getPressedKeys();
+                
+                if (keys.get(KeyEvent.VK_W)) {
+                    System.out.println("W");
+                    c.setyCoord(c.getyCoord()-5);
+                }
+                if (keys.get(KeyEvent.VK_A)) {
+                    System.out.println("A");
+                    c.setxCoord(c.getxCoord()-5);
+                }
+                if (keys.get(KeyEvent.VK_S)) {
+                    System.out.println("S");
+                    c.setyCoord(c.getyCoord()+5);
+                }
+                if (keys.get(KeyEvent.VK_D)) {
+                    System.out.println("D");
+                    c.setxCoord(c.getxCoord()+5);
+                }
+                c.setAimX(gkl.getMouseX());
+                c.setAimY(gkl.getMouseY());
+                
+                
+                
                 
                 repaint();
-                Thread.sleep(500);
+                Thread.sleep(16);
             }
             catch (InterruptedException e){
                 break;
@@ -57,6 +86,7 @@ public class Game extends JPanel implements Runnable{
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
         paintColliders(g);
+        
     }
     
     public void paintColliders(Graphics g){

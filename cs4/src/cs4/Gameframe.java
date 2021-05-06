@@ -20,8 +20,11 @@ public class Gameframe extends JFrame{
         
     public Gameframe(){
         g = new Game();
+        g.setFocusable(true);
+        g.requestFocusInWindow();
         add(g);
         setSize(width, height);
+        
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setResizable(false);
         setLocationRelativeTo(null);

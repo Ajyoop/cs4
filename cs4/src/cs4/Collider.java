@@ -15,6 +15,8 @@ import java.awt.Graphics;
 public class Collider {
     private double xCoord;
     private double yCoord;
+    private int aimX;
+    private int aimY;
     private int height;
     private int width;
 
@@ -29,11 +31,38 @@ public class Collider {
     
     public void draw(Graphics g){
         g.setColor(Color.red);
-        g.fillOval(width, width, width, height);
+        g.fillOval((int)xCoord, (int)yCoord, width, height);
+        g.drawLine((int)xCoord+width/2, (int)yCoord+width/2, aimX, aimY);
     }
     
-    public void move(){
+    public void move(double x,double y){
+        xCoord = x;
+        xCoord = y;
         
+    }
+
+    public void setxCoord(double xCoord) {
+        this.xCoord = xCoord;
+    }
+
+    public void setyCoord(double yCoord) {
+        this.yCoord = yCoord;
+    }
+
+    public double getxCoord() {
+        return xCoord;
+    }
+
+    public double getyCoord() {
+        return yCoord;
+    }
+
+    public void setAimX(int aimX) {
+        this.aimX = aimX;
+    }
+
+    public void setAimY(int aimY) {
+        this.aimY = aimY;
     }
     
         
