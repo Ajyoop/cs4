@@ -12,32 +12,14 @@ import java.awt.event.KeyListener;
  *
  * @author elliot.vesterlund
  */
-public class Player extends Collider implements KeyListener{
+public class Player extends Collider{
 
     public Player(double xCoord, double yCoord, int height, int width) {
         super(xCoord, yCoord, height, width);
         
     }
 
-    @Override
-    public void keyTyped(KeyEvent e) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public void keyPressed(KeyEvent e) {
-        
-    }
-
-    @Override
-    public void keyReleased(KeyEvent e) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
     
-    
-    
-    
-    
+  
     
 }

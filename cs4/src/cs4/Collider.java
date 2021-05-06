@@ -26,19 +26,16 @@ public class Collider {
     }
     
     
-    public void move(){
-        
-    }
-
-    public Collider(double xCoord, double yCoord) {
-        this.xCoord = xCoord;
-        this.yCoord = yCoord;
-    }
     
     public void draw(Graphics g){
         g.setColor(Color.red);
-        g.draw3DRect(height, width, (int)xCoord, (int)yCoord, true);
+        g.fillOval(width, width, width, height);
     }
+    
+    public void move(){
+        
+    }
+    
         
     
 }

@@ -8,6 +8,7 @@ package cs4;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.event.KeyListener;
 import java.util.ArrayList;
 import javax.swing.*;
 
@@ -17,14 +18,17 @@ import javax.swing.*;
  */
 public class Game extends JPanel implements Runnable{
     private ArrayList<Collider> colliders;
-    Timer tm;
+    GameKeyListener gkl; 
     Thread t;
-    Collider cs;
+    Collider c;
     
     public Game() {
         t = new Thread(this);
-        cs = new Collider(50,50,50,50);
-        //colliders.add(c);
+        gkl = new GameKeyListener();
+        addKeyListener(gkl);
+        addMouseListener(gkl);
+        colliders = new ArrayList();
+        colliders.add(new Collider(50,50,50,50));
     }
     
     
@@ -52,14 +56,17 @@ public class Game extends JPanel implements Runnable{
     @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
-       
-        g.drawRect(100, 100, 100, 100);
         paintColliders(g);
     }
     
     public void paintColliders(Graphics g){
-        cs.draw(g);
-        System.out.println("paint colle");
+        if(colliders != null){
+            for (Collider c: colliders) {
+            c.draw(g);
+            }
+        }
+        
+        
     }
 
     

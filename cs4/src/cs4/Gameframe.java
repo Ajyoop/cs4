@@ -20,6 +20,7 @@ public class Gameframe extends JFrame{
         
     public Gameframe(){
         g = new Game();
+        add(g);
         setSize(width, height);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setResizable(false);
