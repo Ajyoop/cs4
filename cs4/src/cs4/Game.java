@@ -6,6 +6,7 @@
 package cs4;
 
 
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Point;
 import java.awt.event.KeyEvent;
@@ -23,18 +24,22 @@ public class Game extends JPanel implements Runnable{
     Thread t;
     Collider c;
     Point a;
+    GameMap m;
     
     
     public Game() {
         
         t = new Thread(this);
         gkl = new GameKeyListener();
+        m = new GameMap(50, super.getWidth(), super.getHeight());
         c = new Collider(50,50,50,50);
         addKeyListener(gkl);
         addMouseListener(gkl);
         addMouseMotionListener(gkl);
         colliders = new ArrayList();
         colliders.add(c);
+        setBackground(Color.white);
+
     }
     
     
@@ -45,19 +50,19 @@ public class Game extends JPanel implements Runnable{
                 HashMap<Integer, Boolean> keys = gkl.getPressedKeys();
                 
                 if (keys.get(KeyEvent.VK_W)) {
-                    System.out.println("W");
+                    
                     c.setyCoord(c.getyCoord()-5);
                 }
                 if (keys.get(KeyEvent.VK_A)) {
-                    System.out.println("A");
+                    
                     c.setxCoord(c.getxCoord()-5);
                 }
                 if (keys.get(KeyEvent.VK_S)) {
-                    System.out.println("S");
+                    
                     c.setyCoord(c.getyCoord()+5);
                 }
                 if (keys.get(KeyEvent.VK_D)) {
-                    System.out.println("D");
+                    System.out.println("ÖL");
                     c.setxCoord(c.getxCoord()+5);
                 }
                 c.setAimX(gkl.getMouseX());
@@ -86,6 +91,7 @@ public class Game extends JPanel implements Runnable{
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
         paintColliders(g);
+        m.drawMap(g);
         
     }
     

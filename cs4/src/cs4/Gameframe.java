@@ -35,6 +35,18 @@ public class Gameframe extends JFrame{
     public Game getGame() {
         return g;
     }
+
+    public int getHeight() {
+        return height;
+    }
+
+    public int getWidth() {
+        return width;
+    }
+
+    public Game getG() {
+        return g;
+    }
     
     
     
