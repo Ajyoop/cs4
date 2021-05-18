@@ -26,14 +26,14 @@ public class GameKeyListener implements KeyListener, MouseListener, MouseMotionL
         pressedKeys.put(KeyEvent.VK_A, false);
         pressedKeys.put(KeyEvent.VK_S, false);
         pressedKeys.put(KeyEvent.VK_D, false);
-        
+
     }
-    
-    
-    
+
+
+
     @Override
     public void keyTyped(KeyEvent e) {
-        
+
     }
 
     @Override
@@ -74,11 +74,11 @@ public class GameKeyListener implements KeyListener, MouseListener, MouseMotionL
         }
     }
 
-    
+
 
     @Override
     public void mouseClicked(MouseEvent e) {
-        
+
     }
 
     @Override
@@ -88,20 +88,20 @@ public class GameKeyListener implements KeyListener, MouseListener, MouseMotionL
 
     @Override
     public void mouseReleased(MouseEvent e) {
-        
+
     }
 
     @Override
     public void mouseEntered(MouseEvent e) {
-        
+
     }
 
     @Override
     public void mouseExited(MouseEvent e) {
-        
+
     }
-   
-    
+
+
     public HashMap<Integer, Boolean> getPressedKeys() {
         return pressedKeys;
     }
@@ -109,13 +109,13 @@ public class GameKeyListener implements KeyListener, MouseListener, MouseMotionL
     @Override
     public void mouseDragged(MouseEvent e) {
         mouseX = e.getX();
-        mouseY = e.getY(); 
+        mouseY = e.getY();
     }
 
     @Override
     public void mouseMoved(MouseEvent e) {
         mouseX = e.getX();
-        mouseY = e.getY(); 
+        mouseY = e.getY();
     }
 
     public int getMouseX() {
@@ -126,7 +126,6 @@ public class GameKeyListener implements KeyListener, MouseListener, MouseMotionL
         return mouseY;
     }
 
-    
-    
-}
 
+
+}

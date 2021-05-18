@@ -5,6 +5,8 @@
  */
 package cs4;
 
+
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Point;
 import java.awt.event.KeyEvent;
@@ -23,13 +25,15 @@ public class Game extends JPanel implements Runnable {
     Thread t;
     Collider c;
     Point a;
-    Map m;
+    GameMap m;
+
 
     public Game() {
 
         t = new Thread(this);
         gkl = new GameKeyListener();
-        c = new Collider(50, 50, 50, 50);
+        m = new GameMap(50, super.getWidth(), super.getHeight());
+        c = new Collider(50,50,50,50);
         addKeyListener(gkl);
         addMouseListener(gkl);
         addMouseMotionListener(gkl);
@@ -64,6 +68,7 @@ public class Game extends JPanel implements Runnable {
         super.paintComponent(g);
         m.draw(g);
         paintColliders(g);
+        m.drawMap(g);
 
     }
 
@@ -74,46 +79,46 @@ public class Game extends JPanel implements Runnable {
             }
         }
     }
-    
+
     public void moveKey(HashMap<Integer, Boolean> keys){
                 if (keys.get(KeyEvent.VK_W)) {
                     if (isLegalMove(c,0, -5)) {
                          c.setyCoord(c.getyCoord() - 5);
                     }
-                    
+
                 }
                 if (keys.get(KeyEvent.VK_A)) {
                     if (isLegalMove(c, -5,0)) {
                          c.setxCoord(c.getxCoord()-5);
                     }
-                    
+
                 }
                 if (keys.get(KeyEvent.VK_S)) {
                     if (isLegalMove(c, 0,+5)) {
                          c.setyCoord(c.getyCoord() + 5);
                     }
-                   
+
                 }
                 if (keys.get(KeyEvent.VK_D)) {
                     if (isLegalMove(c, +5,0)) {
                          c.setxCoord(c.getxCoord() + 5);
                     }
-                    
+
                 }
     }
-    
+
     public boolean isLegalMove(Collider c, int stepX, int stepY){
         return isInBounds(c, stepX, stepY);
     }
-    
+
 
     public boolean isInBounds(Collider c, int stepX, int stepY) {
-        int x = (int) c.getxCoord()+stepX; 
+        int x = (int) c.getxCoord()+stepX;
         int y = (int) c.getyCoord()+stepY;
         if (x > super.getWidth()-c.getWidth()+5 || x < 0|| y > super.getHeight()-c.getHeight() || y < 0 ) {
             return false;
         }
-        
+
         return true;
     }
 
