@@ -25,13 +25,17 @@ public class Game extends JPanel implements Runnable{
     Collider c;
     Point a;
     GameMap m;
+    private int height;
+    private int width;
     
     
-    public Game() {
-        
+    public Game(int width, int height) {
+        this.width = width;
+        this.height = height;
         t = new Thread(this);
         gkl = new GameKeyListener();
-        m = new GameMap(50, super.getWidth(), super.getHeight());
+        System.out.println(width+","+super.getHeight());
+        m = new GameMap(50, width, height);
         c = new Collider(50,50,50,50);
         addKeyListener(gkl);
         addMouseListener(gkl);
