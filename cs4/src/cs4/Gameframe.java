@@ -14,22 +14,22 @@ import javax.swing.JPanel;
  * @author elliot.vesterlund
  */
 public class Gameframe extends JFrame{
-        public int height = 9*50;
-        public int width = 16*50;
+	      private int height = 9*150;
+        private int width = 16*150;
         Game g;
-        
+
     public Gameframe(){
-        g = new Game();
+        g = new Game(width, height);
         g.setFocusable(true);
         g.requestFocusInWindow();
         add(g);
         setSize(width, height);
-        
+
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setResizable(false);
         setLocationRelativeTo(null);
         setVisible(true);
-        
+
     }
 
     public Game getGame() {
@@ -47,8 +47,8 @@ public class Gameframe extends JFrame{
     public Game getG() {
         return g;
     }
-    
-    
-    
-    
+
+
+
+
 }
