@@ -5,114 +5,106 @@
  */
 package cs4;
 
-
-import java.awt.Color;
 import java.awt.Graphics;
-import java.awt.Point;
 import java.awt.event.KeyEvent;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.net.Socket;
 import java.util.ArrayList;
 import java.util.HashMap;
-import javax.swing.*;
+import javax.swing.JPanel;
 
 /**
  *
- * @author elliot.vesterlund
+ * @author Ellio
  */
-public class Game extends JPanel implements Runnable {
-
-    private ArrayList<Collider> colliders;
-    GameKeyListener gkl;
-    Thread t;
-    Collider c;
-    Point a;
-    GameMap m;
-    private int height;
+public class Game extends JPanel implements Runnable{
     private int width;
+    private int height;
     
-
-    public Game(int width, int height) {
-        this.width = width;
-        this.height = height;
-        t = new Thread(this);
-        gkl = new GameKeyListener();
-        System.out.println(width+","+super.getHeight());
-        m = new GameMap(50, width, height);
-        c = new Collider(50,50,50,50);
+    private Socket socket;
+    private ObjectOutputStream output;
+    private ObjectInputStream input;
+    private String playername;
+    
+    private GameKeyListener gkl;
+    
+    private Thread t;
+    
+    private GameMap m;
+    
+    private ArrayList<Player> players = new ArrayList();
+    private Player player;
+    
+    
+    
+    
+    Game(Socket socket, String playername) {
+        this.socket = socket;
+        this.playername = playername;
+        this.t = new Thread(this);
+        
+        this.gkl = new GameKeyListener();
         addKeyListener(gkl);
         addMouseListener(gkl);
-        addMouseMotionListener(gkl);
-        colliders = new ArrayList();
-        colliders.add(c);
-         m = new Map(super.getWidth(), super.getHeight());
+        addMouseMotionListener(gkl); 
+        
+        t.start();
     }
-
+    
+   
     @Override
     public void run() {
-        while (!Thread.interrupted()) {
-            try {
-                moveKey(gkl.getPressedKeys());
-                c.setAimX(gkl.getMouseX());
-                c.setAimY(gkl.getMouseY());
-
-                repaint();
-                Thread.sleep(16);
-            } catch (InterruptedException e) {
-                break;
-            }
-
-        }
+        moveKey(gkl.getPressedKeys());
+        sendPosition(player);
+        
+        repaint();
     }
-
-    public Thread getT() {
-        return t;
-    }
-
-    @Override
-    public void paintComponent(Graphics g) {
+    
+    public void paintComponent(Graphics g){
         super.paintComponent(g);
-        m.draw(g);
-        paintColliders(g);
         m.drawMap(g);
-
-    }
-
-    public void paintColliders(Graphics g) {
-        if (colliders != null) {
-            for (Collider c : colliders) {
-                c.draw(g);
-            }
+        
+        for(Player p : players){
+            
         }
+        
+    
+        
+        
+        
     }
-
+    
+    
     public void moveKey(HashMap<Integer, Boolean> keys){
                 if (keys.get(KeyEvent.VK_W)) {
-                    if (isLegalMove(c,0, -5)) {
-                         c.setyCoord(c.getyCoord() - 5);
+                    if (isLegalMove(player,0, -5)) {
+                         player.setyCoord(player.getyCoord() - 5);
                     }
 
                 }
                 if (keys.get(KeyEvent.VK_A)) {
-                    if (isLegalMove(c, -5,0)) {
-                         c.setxCoord(c.getxCoord()-5);
+                    if (isLegalMove(player, -5,0)) {
+                         player.setxCoord(player.getxCoord()-5);
                     }
 
                 }
                 if (keys.get(KeyEvent.VK_S)) {
-                    if (isLegalMove(c, 0,+5)) {
-                         c.setyCoord(c.getyCoord() + 5);
+                    if (isLegalMove(player, 0,+5)) {
+                         player.setyCoord(player.getyCoord() + 5);
                     }
 
                 }
                 if (keys.get(KeyEvent.VK_D)) {
-                    if (isLegalMove(c, +5,0)) {
-                         c.setxCoord(c.getxCoord() + 5);
+                    if (isLegalMove(player, +5,0)) {
+                         player.setxCoord(player.getxCoord() + 5);
                     }
 
                 }
     }
-
-    public boolean isLegalMove(Collider c, int stepX, int stepY){
-        return isInBounds(c, stepX, stepY);
+    
+    public boolean isLegalMove(Player player, int stepX, int stepY){
+        return isInBounds(player, stepX, stepY);
     }
 
 
@@ -125,5 +117,12 @@ public class Game extends JPanel implements Runnable {
 
         return true;
     }
-
+    
+    
+    
+    
+    
+    
+    
+    
 }

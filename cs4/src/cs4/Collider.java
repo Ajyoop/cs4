@@ -12,50 +12,17 @@ import java.awt.Graphics;
  *
  * @author elliot.vesterlund
  */
-public class Collider {
+public abstract class Collider {
     private double xCoord;
     private double yCoord;
-    private int aimX;
-    private int aimY;
-    private int height;
-    private int width;
 
-    public Collider(double xCoord, double yCoord, int height, int width) {
+    public Collider(double xCoord, double yCoord) {
         this.xCoord = xCoord;
         this.yCoord = yCoord;
-        this.height = height;
-        this.width = width;
-    }
-    
-    
-    
-    public void draw(Graphics g){
-        g.setColor(Color.red);
-        g.fillOval((int)xCoord, (int)yCoord, width, height);
-        g.drawLine((int)xCoord+width/2, (int)yCoord+width/2, aimX, aimY);
-    }
-    
-    public void move(double x,double y){
-        xCoord = x;
-        xCoord = y;
         
     }
-
-    public int getHeight() {
-        return height;
-    }
-
-    public int getWidth() {
-        return width;
-    }
-
-    public void setxCoord(double xCoord) {
-        this.xCoord = xCoord;
-    }
-
-    public void setyCoord(double yCoord) {
-        this.yCoord = yCoord;
-    }
+    
+    public abstract void draw(Graphics g);
 
     public double getxCoord() {
         return xCoord;
@@ -65,14 +32,15 @@ public class Collider {
         return yCoord;
     }
 
-    public void setAimX(int aimX) {
-        this.aimX = aimX;
+    public void setxCoord(double xCoord) {
+        this.xCoord = xCoord;
     }
 
-    public void setAimY(int aimY) {
-        this.aimY = aimY;
+    public void setyCoord(double yCoord) {
+        this.yCoord = yCoord;
     }
     
-        
     
+
+  
 }

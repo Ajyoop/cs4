@@ -15,8 +15,8 @@ public class Cs4 {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        Gameframe gf = new Gameframe();
-        gf.getGame().getT().start();
+        StartFrame player1 = new StartFrame();
+        StartFrame player2 = new StartFrame();
         
         
     }
