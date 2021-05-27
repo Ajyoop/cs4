@@ -113,11 +113,14 @@ public class UsernameFrame extends JFrame implements ActionListener{
     @Override
     public void actionPerformed(ActionEvent e) {
         if (ishost) {
+            //Kallar olika konstruktorer i gameframe beroende på om man är host eller inte
             GameFrame g = new GameFrame(width, height, usrNameField.getText());
+            
         }
         else{
             
             GameFrame g = new GameFrame(width, height, usrNameField.getText(), ipField.getText());
+            
         }
         this.dispose();
     }

@@ -6,9 +6,9 @@
 package cs4;
 
 
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
 import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 import java.net.ServerSocket;
 import java.util.ArrayList;
 
@@ -21,10 +21,11 @@ public class Server implements Runnable{
     private ArrayList<ClientManager> clients;
     private Thread t;
     
-    private ObjectInputStream input;
-    private ObjectOutputStream output;
+    private DataInputStream input;
+    private DataOutputStream output;
     
     public Server(int port){
+        
         clients = new ArrayList();
         try{
             socket = new ServerSocket(port);
@@ -37,11 +38,34 @@ public class Server implements Runnable{
     
     @Override
     public void run() {
-        try{
-            clients.add(new ClientManager(socket.accept(), clients.size()));
-        }catch(IOException e){
-            
+        while(!Thread.interrupted()){
+            try{
+            clients.add(new ClientManager(socket.accept(), this));
+            System.out.println("Created new Clientmanager");
+            }catch(IOException e){
+
+            }
         }
+        
     }
+    
+    
+    public void sendPosition(String newPos, ClientManager c){
+        if (clients != null) {
+            for(ClientManager cm : clients){
+            try {
+                if (cm != c) {
+                    cm.getOutput().writeUTF(newPos);
+                }
+                } catch (IOException ex) {
+                }
+            
+            }
+        }
+        
+        
+    }
+    
+    
     
 }

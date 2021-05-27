@@ -6,6 +6,8 @@
 package cs4;
 
 
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -20,47 +22,59 @@ import java.util.logging.Logger;
 public class ClientManager implements Runnable{
     private Socket socket;
     private Server server;
-    private ObjectInputStream input;
-    private ObjectOutputStream output;
+    private DataInputStream input;
+    private DataOutputStream output;
     private Thread t;
-    private int playernum;
+    private int playername;
     
-    public ClientManager(Socket socket, Server server, int playernum) {
-        
+    public ClientManager(Socket socket, Server server) {
+        this.socket = socket;
         this.server = server;
+        this.playername = playername;
+        
+        try {
+            output= new DataOutputStream(socket.getOutputStream());
+            input = new DataInputStream(socket.getInputStream());
+        } catch (IOException ex) {
+            Logger.getLogger(ClientManager.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
         t = new Thread(this);
         t.start();
     }
 
     @Override
     public void run() {
-        while (!t.isInterrupted()) {
-            
-            if (input != null) {
+       while (!t.isInterrupted()) {
+            try {
+                input = new DataInputStream(socket.getInputStream());
                 
-            
-                try {
-                    input = new ObjectInputStream(socket.getInputStream());
-                    if (input.readObject() instanceof String) {
-
-
-
-                    }else if(input.readObject() instanceof Player){
-
-
-
-                    }else if(input.readObject() instanceof Bullet){
-
-                    }
-
-                } catch (IOException ex) {
-
-                } catch (ClassNotFoundException ex) {
-                    Logger.getLogger(ClientManager.class.getName()).log(Level.SEVERE, null, ex);
+                if (input != null) {
+                    server.sendPosition(input.readUTF(), this);
                 }
-            }            
+            } catch (IOException ex) {
+                Logger.getLogger(ClientManager.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
         }   
     }
+
+    public Socket getSocket() {
+        return socket;
+    }
+
+
+    public DataInputStream getInput() {
+        return input;
+    }
+
+    public DataOutputStream getOutput() {
+        return output;
+    }
+    
+    
+    
+    
     
     
 }

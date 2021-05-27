@@ -21,12 +21,13 @@ public class GameKeyListener implements KeyListener, MouseListener, MouseMotionL
     HashMap<Integer, Boolean> pressedKeys = new HashMap<Integer, Boolean>();
     private int mouseX;
     private int mouseY;
+    //Skapar nycklar för de knappar som man ska kunna trycka på
     public GameKeyListener() {
         pressedKeys.put(KeyEvent.VK_W , false);
         pressedKeys.put(KeyEvent.VK_A, false);
         pressedKeys.put(KeyEvent.VK_S, false);
         pressedKeys.put(KeyEvent.VK_D, false);
-
+        pressedKeys.put(KeyEvent.VK_SPACE, false);
     }
 
 
@@ -36,6 +37,9 @@ public class GameKeyListener implements KeyListener, MouseListener, MouseMotionL
 
     }
 
+    
+    
+    //Om knappen är nedtryckt så sätts den till true i hashmappen
     @Override
     public void keyPressed(KeyEvent e) {
         int key = e.getKeyCode();
@@ -52,9 +56,14 @@ public class GameKeyListener implements KeyListener, MouseListener, MouseMotionL
             case KeyEvent.VK_D:
                 pressedKeys.put(KeyEvent.VK_D, true);
                 break;
+            case KeyEvent.VK_SPACE:
+                pressedKeys.put(KeyEvent.VK_SPACE , true);
+                break;
         }
     }
 
+    
+    //om Knappen släpps så sättes den återigen till false
     @Override
     public void keyReleased(KeyEvent e) {
        int key = e.getKeyCode();
@@ -71,6 +80,10 @@ public class GameKeyListener implements KeyListener, MouseListener, MouseMotionL
             case KeyEvent.VK_D:
                 pressedKeys.put(KeyEvent.VK_D , false);
                 break;
+            case KeyEvent.VK_SPACE:
+                pressedKeys.put(KeyEvent.VK_SPACE , false);
+                break;
+                
         }
     }
 
@@ -108,8 +121,7 @@ public class GameKeyListener implements KeyListener, MouseListener, MouseMotionL
 
     @Override
     public void mouseDragged(MouseEvent e) {
-        mouseX = e.getX();
-        mouseY = e.getY();
+        
     }
 
     @Override

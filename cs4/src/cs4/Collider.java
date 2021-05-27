@@ -15,6 +15,7 @@ import java.awt.Graphics;
 public abstract class Collider {
     private double xCoord;
     private double yCoord;
+    
 
     public Collider(double xCoord, double yCoord) {
         this.xCoord = xCoord;
@@ -39,8 +40,10 @@ public abstract class Collider {
     public void setyCoord(double yCoord) {
         this.yCoord = yCoord;
     }
+
+    public abstract int getWidth();
     
-    
+    public abstract int getHeight();
 
   
 }

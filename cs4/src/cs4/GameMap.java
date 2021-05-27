@@ -19,7 +19,8 @@ public class GameMap {
     int size;
     int height;
     int width;
-    
+    //VEt inte vad som hände med mappen, den sluta fungera när jag la upp allt på github
+    //Det den gjorde innan var iallafall att skapa ett random rutnät av polygonfyrkanter
     public GameMap(int size, int width, int height) {
         this.size = size;
         this.height = height;

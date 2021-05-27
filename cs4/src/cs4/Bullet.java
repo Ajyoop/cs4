@@ -6,6 +6,7 @@
 
 package cs4;
 
+import java.awt.Color;
 import java.awt.Graphics;
 
 /**
@@ -14,21 +15,39 @@ import java.awt.Graphics;
  */
 public class Bullet extends Collider{
     private double angle;
-    private int vel;
+    private  static int vel = 10;
+    private static int width = 4;
+    private static int height = 4;
     
     
-public Bullet(double xCoord, double yCoord) {
+public Bullet(double xCoord, double yCoord, double angle) {
         super(xCoord, yCoord);
-        
+        this.angle = angle;
         
     }
 
     @Override
     public void draw(Graphics g) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        g.setColor(Color.BLACK);
+        g.fillOval((int)this.getxCoord(), (int)this.getyCoord(), width, height);
     }
     
+    public double getXVel(){
+        return Math.cos(angle)*vel;
+    }
+    public double getYVel(){
+        return Math.sin(angle)*vel;
+    }
 
+    @Override
+    public int getWidth() {
+        return width;
+    }
+
+    @Override
+    public int getHeight() {
+        return height;
+    }
 
 
 

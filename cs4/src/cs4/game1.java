@@ -19,8 +19,8 @@ import javax.swing.*;
  *
  * @author elliot.vesterlund
  */
-public class game1 extends JPanel implements Runnable {
-
+public abstract class game1 extends JPanel implements Runnable {
+/*
     private ArrayList<Collider> colliders;
     GameKeyListener gkl;
     Thread t;
@@ -118,8 +118,8 @@ public class game1 extends JPanel implements Runnable {
     public boolean isLegalMove(Collider c, int stepX, int stepY){
         return isInBounds(c, stepX, stepY);
     }
-
-
+*/
+/*
     public boolean isInBounds(Collider c, int stepX, int stepY) {
         int x = (int) c.getxCoord()+stepX;
         int y = (int) c.getyCoord()+stepY;
@@ -129,5 +129,5 @@ public class game1 extends JPanel implements Runnable {
 
         return true;
     }
-
+*/
 }
